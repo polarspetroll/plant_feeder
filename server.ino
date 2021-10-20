@@ -101,12 +101,12 @@ void control() {
 }
 
 void pump_off() {
-  digitalWrite(relay_pin, LOW);
+  digitalWrite(relay_pin, HIGH);
   server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "application/json", "{\"status\": \"off\"}");
 }
 void pump_on() {
-  digitalWrite(relay_pin, HIGH);
+  digitalWrite(relay_pin, LOW);
   server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "application/json", "{\"status\": \"on\"}");
 }
