@@ -23,6 +23,11 @@ void script();
 /******************/
 
 void setup() {
+  pinMode(16, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(16, LOW);
+  digitalWrite(LED_BUILTIN, HIGH);
+  
   /// WI-FI ///
   Serial.begin(115200);
   SPIFFS.begin();
@@ -101,11 +106,13 @@ void control() {
 }
 
 void pump_off() {
+  digitalWrite(LED_BUILTIN, HIGH);
   digitalWrite(relay_pin, HIGH);
   server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "application/json", "{\"status\": \"off\"}");
 }
 void pump_on() {
+  digitalWrite(LED_BUILTIN, LOW);
   digitalWrite(relay_pin, LOW);
   server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "application/json", "{\"status\": \"on\"}");
